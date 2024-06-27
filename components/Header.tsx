@@ -5,7 +5,14 @@ const Header = () => {
     <nav className='navbar'>
       <div className='navbar-container'>
         <h2>Expense Tracker</h2>
-        <div></div>
+        <div>
+          <SignedOut>
+            <SignInButton />
+          </SignedOut>
+          <SignedIn>
+            <UserButton />
+          </SignedIn>
+        </div>
       </div>
     </nav>
   );
