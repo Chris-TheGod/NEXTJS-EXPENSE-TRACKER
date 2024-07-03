@@ -3,7 +3,7 @@
 import { Transaction } from '@/types/Transaction';
 import { addCommas } from '@/lib/utils';
 import { toast } from 'react-toastify';
-import { link } from 'fs';
+import deleteTransaction from '@/app/actions/deleteTransacion';
 
 const TransactionItem = ({ transaction }: { transaction: Transaction }) => {
   const sign = transaction.amount < 0 ? '-' : '+';
@@ -15,8 +15,13 @@ const TransactionItem = ({ transaction }: { transaction: Transaction }) => {
 
     if (!confirmed) return;
 
-    await deleteTransaction(transactionId);
-    toast.success('Transaction deleted');
+    const { message, error } = await deleteTransaction(transactionId);
+
+    if (error) {
+      toast.error(error);
+    }
+
+    toast.success(message);
   };
 
   return (
